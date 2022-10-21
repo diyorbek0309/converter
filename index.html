@@ -11,15 +11,15 @@
       <h1>Currency Convertor</h1>
       <div class="box">
         <div class="left_box">
-          <select name="currency" class="currency"></select>
-          <input type="number" name="" id="num" />
+          <select name="currency" class="currency" id="select1"></select>
+          <input type="number" name="" id="num" value="0" />
         </div>
         <div class="right_box">
-          <select name="currency" class="currency"></select>
-          <input type="text" name="" id="ans" disabled />
+          <select name="currency" class="currency" id="select2"></select>
+          <input type="text" name="" id="ans" disabled  value="0"/>
         </div>
       </div>
-      <button class="btn" id="btn">Convert</button>
+      <button class="btn" id="btn" onclick="convert()">Convert</button>
     </div>
 
     <script src="main.js"></script>

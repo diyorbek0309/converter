@@ -130,9 +130,6 @@ const makeConvertUrl = (from, to) =>
   `https://api.happi.dev/v1/exchange/${from}/${to}?apikey=d289f0hWuYeUWAeLAVCj7T9TACNxkPbDXLbxpuJLoBBXHngD6uBJ1Msx`;
 
 const convert = async () => {
-  // let rateUSD1 = data.find((curr) => curr.code === value1).price_usd;
-  // let rateUSD2 = data.find((curr) => curr.code === value2).price_usd;
-
   let response = await fetch(makeConvertUrl(value1, value2));
   const { result } = await response.json();
 

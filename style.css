@@ -6,6 +6,7 @@
 
 body {
   background: linear-gradient(315deg, #0066ff, #00ffcc);
+  width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -71,4 +72,18 @@ input {
   cursor: pointer;
   font-size: 1em;
   margin: 0.5em 0;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popular_item {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  font-size: 24px;
 }

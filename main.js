@@ -68,6 +68,7 @@ let userCountry;
 const url =
   "https://api.happi.dev/v1/exchange?apikey=d289f0hWuYeUWAeLAVCj7T9TACNxkPbDXLbxpuJLoBBXHngD6uBJ1Msx";
 
+const popular_wrap = document.getElementsByClassName("popular")[0];
 const select1 = document.getElementById("select1");
 const select2 = document.getElementById("select2");
 const input1 = document.getElementById("num");
@@ -130,9 +131,6 @@ const makeConvertUrl = (from, to) =>
   `https://api.happi.dev/v1/exchange/${from}/${to}?apikey=d289f0hWuYeUWAeLAVCj7T9TACNxkPbDXLbxpuJLoBBXHngD6uBJ1Msx`;
 
 const convert = async () => {
-  // let rateUSD1 = data.find((curr) => curr.code === value1).price_usd;
-  // let rateUSD2 = data.find((curr) => curr.code === value2).price_usd;
-
   let response = await fetch(makeConvertUrl(value1, value2));
   const { result } = await response.json();
 
@@ -140,5 +138,63 @@ const convert = async () => {
     (input1.value * result.result.value).toFixed(6) +
     " " +
     value2.toUpperCase();
-  // test
 };
+
+const showPopular = () => {
+  // const popular = ["USD", "RUB", "EUR", "KZT", "TRY"];
+  const results = Promise.all([
+    fetch(makeConvertUrl("usd", "uzs")),
+    fetch(makeConvertUrl("rub", "uzs")),
+    fetch(makeConvertUrl("eur", "uzs")),
+    fetch(makeConvertUrl("kzt", "uzs")),
+    fetch(makeConvertUrl("try", "uzs")),
+  ])
+    .then((responses) => {
+      return Promise.all(
+        responses.map((response) => {
+          return response.json();
+        })
+      );
+    })
+    .then((data) => {
+      data.forEach((item) => {
+        console.log(item);
+        popular_wrap.innerHTML += `
+        <div class="popular_item">
+          <div class="left">
+            <p>${item.result.from.code} ${item.result.from.name}</p>
+            <p>1.00</p>
+          </div>
+          <div class="right">
+            <p>UZS</p>
+            <p>${item.result.result.value.toFixed(2)}</p>
+          </div>
+        </div>`;
+      });
+    })
+    .catch((err) => {
+      popular_wrap.innerHTML = `<p class="error">Error: Server muammosi</p>`;
+      console.log(err);
+    });
+
+  // popular.forEach(async (item) => {
+  //   let response = await fetch(makeConvertUrl(item, "uzs"));
+  //   const { result } = await response.json();
+
+  //   popular_wrap.innerHTML += `
+  //   <div class="popular_item">
+  //     <div class="left">
+  //       <p>${item} ${result.from.name}</p>
+  //       <p>1.00</p>
+  //     </div>
+  //     <div class="right">
+  //       <p>UZS</p>
+  //       <p>${result.result.value.toFixed(2)}</p>
+  //     </div>
+  //   </div>`;
+
+  //   console.log(result);
+  // });
+};
+
+showPopular();

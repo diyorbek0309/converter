@@ -158,7 +158,6 @@ const showPopular = () => {
     })
     .then((data) => {
       data.forEach((item) => {
-        console.log(item);
         popular_wrap.innerHTML += `
         <div class="popular_item">
           <div class="left">
@@ -198,3 +197,18 @@ const showPopular = () => {
 };
 
 showPopular();
+
+const showHistory = () => {
+  const history_items = ["UZS", "RUB", "EUR"];
+
+  history_items.forEach(async (item) => {
+    let response = await fetch(
+      `https://api.happi.dev/v1/exchange/${item}/history?apikey=d289f0hWuYeUWAeLAVCj7T9TACNxkPbDXLbxpuJLoBBXHngD6uBJ1Msx`
+    );
+    const { result } = await response.json();
+
+    console.log(result);
+  });
+};
+
+showHistory();

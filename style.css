@@ -87,3 +87,20 @@ input {
   background: #fff;
   font-size: 24px;
 }
+
+.history {
+  background-color: #fff;
+}
+
+.history div {
+  display: flex;
+}
+
+table {
+  font-size: 20px;
+}
+
+table td {
+  padding: 5px;
+  text-align: center;
+}
